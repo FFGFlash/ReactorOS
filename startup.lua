@@ -44,6 +44,8 @@ Events:connect("rednet_message", function(sender, req, protocol)
   end
 end)
 
+Events:setInterval(function() end, 1)
+
 function Draw()
   local function writeInfo(header, text)
     local x1, y1 = term.getCursorPos()
