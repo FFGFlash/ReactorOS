@@ -52,7 +52,7 @@ if http then
     return true
   end
 
-  local res,err = download("FFGFlash", "ReactorOS", "/", nil, "main")
+  local res,err = download("FFGFlash", "ReactorOS", "/", nil, "manager-client")
   if not res then return print(err) end
   os.reboot()
 else
