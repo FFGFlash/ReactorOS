@@ -56,9 +56,9 @@ function Draw()
     term.setTextColor(colors.white)
     term.write(text)
     local X, Y = term.getCursorPos()
-    local x2, y2 = math.max(x, X), math.max(y, Y)
+    local x2, y2 = math.max(x, X) + 1, math.max(y, Y) + 1
     term.setCursorPos(x2, y1)
-    return { x1, y1, x2 + 1, y2 + 1 }
+    return { x1, y1, x2, y2 }
   end
 
   term.clear()
