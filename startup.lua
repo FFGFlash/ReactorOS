@@ -45,7 +45,35 @@ Events:connect("rednet_message", function(sender, req, protocol)
 end)
 
 function Draw()
+  local function writeInfo(header, text)
+    local x1, y1 = term.getCursorPos()
+    term.setBackgroundColor(colors.lightBlue)
+    term.setTextColor(colors.black)
+    term.write(header)
+    local x, y = term.getCursorPos()
+    term.setCursorPos(x1, y1 + 1)
+    term.setBackgroundColor(colors.black)
+    term.setTextColor(colors.white)
+    local X, Y = term.getCursorPos()
+    local x2, y2 = math.max(x, X), math.max(y, Y)
+    term.setCursorPos(x2, y1)
+    return { x1, y1, x2, y2 }
+  end
 
+  term.clear()
+  term.setCursorPos(1,1)
+  term.setBackgroundColor(colors.lightBlue)
+  term.clearLine()
+  local bb = writeInfo("Produced ", Reactor.Energy.Produced)
+  writeInfo("Stored / ", Reactor.Energy.Stored)
+  writeInfo("Capacity", Reactor.Energy.Capacity)
+  term.setCursorPos(bb[1], bb[4] + 1)
+  term.setBackgroundColor(colors.lightBlue)
+  term.clearLine()
+  writeInfo("Consumed ", Reactor.Fuel.Consumed)
+  writeInfo("Stored + ", Reactor.Fuel.Stored)
+  writeInfo("Waste / ", Reactor.Fuel.Waste)
+  writeInfo("Capacity", Reactor.Fuel.Capacity)
 end
 
 while Running do
