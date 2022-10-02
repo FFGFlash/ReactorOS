@@ -44,7 +44,7 @@ Events:connect("rednet_message", function(sender, req, protocol)
   end
 end)
 
-Events:setInterval(function() end, 1)
+Events:setInterval(function() end, 0.05)
 
 function Draw()
   local function writeInfo(header, text)
