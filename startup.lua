@@ -58,22 +58,22 @@ function Draw()
     local X, Y = term.getCursorPos()
     local x2, y2 = math.max(x, X), math.max(y, Y)
     term.setCursorPos(x2, y1)
-    return { x1, y1, x2, y2 }
+    return { x1, y1, x2 + 1, y2 + 1 }
   end
 
   term.clear()
   term.setCursorPos(1,1)
   term.setBackgroundColor(colors.lightBlue)
   term.clearLine()
-  local bb = writeInfo("Produced ", Reactor.Energy.Produced)
-  writeInfo("Stored / ", Reactor.Energy.Stored)
+  local bb = writeInfo("Produced", Reactor.Energy.ProducedLastTick)
+  writeInfo("Stored /", Reactor.Energy.Stored)
   writeInfo("Capacity", Reactor.Energy.Capacity)
-  term.setCursorPos(bb[1], bb[4] + 1)
+  term.setCursorPos(bb[1], bb[4])
   term.setBackgroundColor(colors.lightBlue)
   term.clearLine()
-  writeInfo("Consumed ", Reactor.Fuel.Consumed)
-  writeInfo("Stored + ", Reactor.Fuel.Stored)
-  writeInfo("Waste / ", Reactor.Fuel.Waste)
+  writeInfo("Consumed", Reactor.Fuel.ConsumedLastTick)
+  writeInfo("Stored +", Reactor.Fuel.Amount)
+  writeInfo("Waste /", Reactor.Fuel.Waste)
   writeInfo("Capacity", Reactor.Fuel.Capacity)
 end
 
