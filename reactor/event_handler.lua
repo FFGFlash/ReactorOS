@@ -33,5 +33,21 @@ return function()
     end
   end
 
+  function Handler:setInterval(callback, time, ...)
+    local args = { ... }
+    local token = os.startTimer(time)
+    local conn = self:connect("timer", function(a, f)
+      if f ~= token then return end
+      callback(a, table.unpack(args))
+      token = os.startTimer(time)
+    end)
+    return { Token = token, Conn = conn }
+  end
+
+  function Handler:clearInterval(interval)
+    os.cancelTimer(interval.Token)
+    self:disconnect(interval.Conn)
+  end
+
   return setmetatable(Handler, Handler)
 end
