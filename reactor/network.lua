@@ -2,7 +2,7 @@ local Network = { Hostname = nil, Protocol = "Reactor://", RequestTimeout = 15 }
 Network.__index = Network
 
 -- Open Rednet Channels Automatically
-local ComputerId = os.getComputerId()
+local ComputerId = os.getComputerID()
 local Modems = { peripheral.find("modem") }
 for i, modem in ipairs(Modems) do
   if modem.isWireless() then

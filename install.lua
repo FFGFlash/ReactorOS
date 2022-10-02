@@ -1,9 +1,10 @@
 if http then
-  local function download(user, repo, dpath, rpath, branch)
+  local function download(user, repo, dpath, rpath, branch, extract)
     if repo == nil or user == nil then return false,"User and Repo required" end
     if rpath == nil then rpath = "" end
     if dpath == nil then dpath = "/downloads/" end
     if branch == nil then branch = "main" end
+    if extract == nil then extract = false end
 
     local function downloadManager(path, files, dirs)
       if not files then files = {} end
@@ -18,7 +19,10 @@ if http then
         for str in res:gmatch('"name":"([^\"]+)"') do table.insert(fName, str) end
       end
       for i,data in pairs(fType) do
-        local path = dpath.."/"..repo.."/"
+        local path = dpath.."/"
+        if not extract then
+          path = path..repo.."/"
+        end
         if data == "file" then
           cPath = http.get("https://raw.github.com/"..user.."/"..repo.."/"..branch.."/"..fPath[i])
           if cPath == nil then fPath[i] = fPath[i].."/"..fName[i] end
@@ -52,7 +56,7 @@ if http then
     return true
   end
 
-  local res,err = download("FFGFlash", "ReactorOS", "/", nil, "reactor")
+  local res,err = download("FFGFlash", "ReactorOS", "/", nil, "reactor", true)
   if not res then return print(err) end
   os.reboot()
 else
