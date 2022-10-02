@@ -17,7 +17,7 @@ while true do
     Name = read()
   end
   if Network(Name) then
-    Settings:set("reactor.name", name)
+    Settings:set("reactor.name", Name)
     break
   else
     Name = nil

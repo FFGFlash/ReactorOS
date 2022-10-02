@@ -18,12 +18,17 @@ function Reactor:__call()
   self.Levels = Peripheral.getControlRodsLevels()
 
   for name, value in pairs(energy) do
-    self.Energy[strsub(name, 7)] = math.floor(value * 100) / 100
+    pcall(function() value = math.floor(tonumber(value) * 100) / 100 end)
+    self.Energy[string.sub(name, 7)] = value
   end
 
   for name, value in pairs(fuel) do
-    self.Fuel[strsub(name, 5)] = math.floor(value * 100) / 100
+    pcall(function() value = math.floor(tonumber(value) * 100) / 100 end)
+    self.Fuel[string.sub(name, 5)] = value
   end
+
+  self.Fuel.Waste = self.Fuel.eAmount
+  self.Fuel.eAmount = nil
 
   return self
 end
