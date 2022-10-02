@@ -15,6 +15,10 @@ return function(path, descriptor)
     self:save()
   end
 
+  function Handler:get(name)
+    return settings.get(name)
+  end
+
   function Handler:load()
     settings.load(self.Path)
   end
