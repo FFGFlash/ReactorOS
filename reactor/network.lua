@@ -21,6 +21,10 @@ function Network:__call(hostname)
   return true
 end
 
+function Network:lookup(hostname)
+  return { rednet.lookup(self.Protocol, hostname) }
+end
+
 function Network:broadcast(event, ...)
   rednet.broadcast({ event, ... }, self.Protocol)
 end
