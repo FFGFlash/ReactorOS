@@ -36,7 +36,7 @@ function Draw()
   if #ReactorIds == 0 then
     term.write("No Reactors Online...")
     return
-  elseif #Reactors == 0 then
+  elseif Reactors == {} then
     term.write("Awaiting Reactor Data...")
     return
   end
