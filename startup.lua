@@ -26,14 +26,14 @@ while true do
   end
 end
 
+Reactor:setName(Name)
+
 Events:connect("terminate", function() Running = false end)
 Events:connect("rednet_message", function(sender, req, protocol)
   if protocol ~= Network.Protocol then return end
   local event = table.remove(req, 1)
 
-  if event == "name_request" then
-    Network:send(sender, "name_response", Name)
-  elseif event == "reactor_start" then
+  if event == "reactor_start" then
     Reactor:start()
   elseif event == "reactor_stop" then
     Reactor:stop()

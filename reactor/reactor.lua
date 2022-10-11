@@ -1,6 +1,7 @@
 local Peripheral = peripheral.find("BigReactors-Reactor")
 
 local Reactor = {
+  Name = "",
   NumberOfControlRods = 0,
   Active = false,
   Levels = 0,
@@ -31,6 +32,10 @@ function Reactor:__call()
   self.Fuel.eAmount = nil
 
   return self
+end
+
+function Reactor:setName(name)
+  self.Name = name
 end
 
 function Reactor:start()
