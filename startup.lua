@@ -26,7 +26,7 @@ end, 0.05)
 
 function Update()
   Reactor = math.min(math.max(Reactor, 1), #ReactorIds) or 1
-  SelectedReactor = Reactors[ReactorIds[Reactor]]
+  SelectedReactor = Reactors[ReactorIds[Reactor]] or {}
 end
 
 function Draw()
@@ -38,6 +38,9 @@ function Draw()
     term.write("No Reactors Online...")
     return
   elseif Reactors == {} then
+    term.write("Awaiting Reactor Data...")
+    return
+  elseif not SelectedReactor then
     term.write("Awaiting Reactor Data...")
     return
   end
@@ -52,8 +55,8 @@ function Draw()
   term.setBackgroundColor(colors.lightBlue)
   term.setTextColor(colors.black)
   term.clearLine()
-  term.setCursorPos(width / 2, y)
-  term.writeCentered(SelectedReactor.Name)
+  term.setCursorPos(width / 2, 1)
+  writeCentered(SelectedReactor.Name)
   term.setBackgroundColor(colors.black)
   term.setTextColor(colors.white)
   term.setCursorPos(2,3)
