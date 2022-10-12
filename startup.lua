@@ -60,6 +60,8 @@ function Draw()
     return
   end
 
+  local color = SelectedReactor.Active and colors.lightBlue or colors.red
+
   local function writeCentered(text)
     local len = string.len(text)
     local x, y = term.getCursorPos()
@@ -73,7 +75,7 @@ function Draw()
     term.setCursorPos(x, y + 1)
   end
 
-  term.setBackgroundColor(colors.lightBlue)
+  term.setBackgroundColor(color)
   term.setTextColor(colors.black)
   term.clearLine()
   if Reactor > 1 then
@@ -96,11 +98,12 @@ function Draw()
   writeNextLine("Fuel (%): "..(math.floor(SelectedReactor.Fuel.Amount / SelectedReactor.Fuel.Capacity * 10000) / 100).."%")
   writeNextLine("Waste (%): "..(math.floor(SelectedReactor.Fuel.Waste / SelectedReactor.Fuel.Capacity * 10000) / 100).."%")
 
-  term.setCursorPos(2, height)
-  term.setBackgroundColor(colors.lightBlue)
+  term.setCursorPos(1, height)
+  term.setBackgroundColor(color)
+  term.setTextColor(colors.black)
   term.clearLine()
 
-  term.write("P")
+  writeCentered(SelectedReactor.Active and "Power Off" or "Power On")
 end
 
 while Running do
