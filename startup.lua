@@ -21,6 +21,16 @@ Events:connect("rednet_message", function(sender, req, protocol)
   end
 end)
 
+Events:connect("mouse_click", function(btn, x, y)
+  if btn ~= 1 then return end
+  local width, height = term.getSize()
+  if x >= 1 and x <= 2 and y == 1 then
+    Reactor = Reactor - 1
+  elseif x >= width - 1 and x <= width and y == 1 then
+    Reactor = Reactor + 1
+  end
+end)
+
 Events:setInterval(function()
   ReactorIds = Network:lookup()
 end, 0.05)
@@ -62,6 +72,14 @@ function Draw()
   term.setBackgroundColor(colors.lightBlue)
   term.setTextColor(colors.black)
   term.clearLine()
+  if Reactor > 1 then
+    term.setCursorPos(2,1)
+    term.write("<")
+  end
+  if Reactor < #ReactorIds then
+    term.setCursorPos(width - 1, 1)
+    term.write(">")
+  end
   term.setCursorPos(width / 2, 1)
   writeCentered(SelectedReactor.Name)
   term.setBackgroundColor(colors.lightGray)
