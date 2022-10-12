@@ -69,10 +69,10 @@ function Draw()
   term.setCursorPos(2,3)
   writeNextLine("Control Rods: "..SelectedReactor.NumberOfControlRods)
   writeNextLine("Energy Produced: "..SelectedReactor.Energy.ProducedLastTick)
-  writeNextLine("Energy (%): "..(math.floor(SelectedReactor.Energy.Stored / SelectedReactor.Energy.Capacity * 100)).."%")
+  writeNextLine("Energy (%): "..(math.floor(SelectedReactor.Energy.Stored / SelectedReactor.Energy.Capacity * 10000) / 100).."%")
   writeNextLine("Fuel Consumed: "..SelectedReactor.Fuel.ConsumedLastTick)
-  writeNextLine("Fuel (%): "..(math.floor(SelectedReactor.Fuel.Amount / SelectedReactor.Fuel.Capacity * 100)).."%")
-  writeNextLine("Waste (%): "..(math.floor(SelectedReactor.Fuel.Waste / SelectedReactor.Fuel.Capacity * 100)).."%")
+  writeNextLine("Fuel (%): "..(math.floor(SelectedReactor.Fuel.Amount / SelectedReactor.Fuel.Capacity * 10000) / 100).."%")
+  writeNextLine("Waste (%): "..(math.floor(SelectedReactor.Fuel.Waste / SelectedReactor.Fuel.Capacity * 10000) / 100).."%")
 end
 
 while Running do
