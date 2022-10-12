@@ -29,7 +29,7 @@ Events:connect("mouse_click", function(btn, x, y)
     Reactor = Reactor - 1
   elseif x >= width - 1 and x <= width and y == 1 then
     Reactor = Reactor + 1
-  elseif x >= 1 and x <= 2 and y == height then
+  elseif y == height then
     Network:send(SelectedReactorId, SelectedReactor.Active and "reactor_stop" or "reactor_start")
   end
 end)
