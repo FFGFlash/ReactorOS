@@ -8,6 +8,7 @@ local ReactorIds = Network:lookup()
 local Reactors = {}
 local Running = true
 local Reactor = 1
+local SelectedReactorId = -1
 local SelectedReactor = {}
 local next = next
 
@@ -28,6 +29,8 @@ Events:connect("mouse_click", function(btn, x, y)
     Reactor = Reactor - 1
   elseif x >= width - 1 and x <= width and y == 1 then
     Reactor = Reactor + 1
+  elseif x >= 1 and x <= 2 and y == height then
+    Network:send(SelectedReactorId, SelectedReactor.Active and "reactor_stop" or "reactor_start")
   end
 end)
 
@@ -37,7 +40,8 @@ end, 0.05)
 
 function Update()
   Reactor = math.min(math.max(Reactor, 1), #ReactorIds) or 1
-  SelectedReactor = Reactors[ReactorIds[Reactor]] or {}
+  SelectedReactorId = ReactorIds[Reactor] or -1
+  SelectedReactor = Reactors[SelectedReactorId] or {}
 end
 
 function Draw()
@@ -91,6 +95,12 @@ function Draw()
   writeNextLine("Fuel Consumed: "..SelectedReactor.Fuel.ConsumedLastTick)
   writeNextLine("Fuel (%): "..(math.floor(SelectedReactor.Fuel.Amount / SelectedReactor.Fuel.Capacity * 10000) / 100).."%")
   writeNextLine("Waste (%): "..(math.floor(SelectedReactor.Fuel.Waste / SelectedReactor.Fuel.Capacity * 10000) / 100).."%")
+
+  term.setCursorPos(2, height)
+  term.setBackgroundColor(colors.lightBlue)
+  term.clearLine()
+
+  term.write("P")
 end
 
 while Running do
@@ -98,3 +108,8 @@ while Running do
   Draw()
   Events()
 end
+
+term.setBackgroundColor(colors.black)
+term.setTextColor(colors.white)
+term.clear()
+term.setCursorPos(1,1)
