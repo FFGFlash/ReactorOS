@@ -53,6 +53,12 @@ function Draw()
     term.write(text)
   end
 
+  local function writeNextLine(text)
+    local x, y = term.getCursorPos()
+    term.write(text)
+    term.setCursorPos(x, y + 1)
+  end
+
   term.setBackgroundColor(colors.lightBlue)
   term.setTextColor(colors.black)
   term.clearLine()
@@ -61,12 +67,12 @@ function Draw()
   term.setBackgroundColor(colors.black)
   term.setTextColor(colors.white)
   term.setCursorPos(2,3)
-  print("Control Rods: "..SelectedReactor.NumberOfControlRods)
-  print("Energy Produced: "..SelectedReactor.Energy.ProducedLastTick)
-  print("Energy (%): "..(math.floor(SelectedReactor.Energy.Stored / SelectedReactor.Energy.Capacity * 100)).."%")
-  print("Fuel Consumed: "..SelectedReactor.Fuel.ConsumedLastTick)
-  print("Fuel (%): "..(math.floor(SelectedReactor.Fuel.Amount / SelectedReactor.Fuel.Capacity * 100)).."%")
-  print("Waste (%): "..(math.floor(SelectedReactor.Fuel.Waste / SelectedReactor.Fuel.Capacity * 100)).."%")
+  writeNextLine("Control Rods: "..SelectedReactor.NumberOfControlRods)
+  writeNextLine("Energy Produced: "..SelectedReactor.Energy.ProducedLastTick)
+  writeNextLine("Energy (%): "..(math.floor(SelectedReactor.Energy.Stored / SelectedReactor.Energy.Capacity * 100)).."%")
+  writeNextLine("Fuel Consumed: "..SelectedReactor.Fuel.ConsumedLastTick)
+  writeNextLine("Fuel (%): "..(math.floor(SelectedReactor.Fuel.Amount / SelectedReactor.Fuel.Capacity * 100)).."%")
+  writeNextLine("Waste (%): "..(math.floor(SelectedReactor.Fuel.Waste / SelectedReactor.Fuel.Capacity * 100)).."%")
 end
 
 while Running do
