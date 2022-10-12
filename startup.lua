@@ -98,7 +98,7 @@ function Draw()
   writeNextLine("Fuel (%): "..(math.floor(SelectedReactor.Fuel.Amount / SelectedReactor.Fuel.Capacity * 10000) / 100).."%")
   writeNextLine("Waste (%): "..(math.floor(SelectedReactor.Fuel.Waste / SelectedReactor.Fuel.Capacity * 10000) / 100).."%")
 
-  term.setCursorPos(1, height)
+  term.setCursorPos(width / 2, height)
   term.setBackgroundColor(color)
   term.setTextColor(colors.black)
   term.clearLine()
